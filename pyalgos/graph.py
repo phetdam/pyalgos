@@ -8,11 +8,14 @@
 # adjacency list entry: at index u, (v, w); represents edge u~v, weight w
 # edge list entry: (u, v, w); represents edge u~v, weight w
 # adjacency matrix entry: at G[u][v] = w; represents edge u~v with weight w. w
-# may be boolean to represent an unewighted edge, or None to represent no edge
+# may be boolean to represent an unweighted edge, or None to represent no edge
 # being present. negative weight edges are allowed.
 #
 #
 # Changelog:
+#
+# corrected error made by bfs during evaluation of adjacency matrix type. now
+# only boolean adjacency matrices are supported for bfs.
 #
 # 05-25-2019
 #
@@ -38,8 +41,7 @@ def bfs(src, G, is_adjm = False, get_path = False):
 
     the input graph G is treated as a directed graph with the adjacency list
     format if adj_M is False, else if adj_M is True, then G will be treated as
-    an |V(G)| x |V(G)| adjacency matrix. the adjacency matrix can either be
-    boolean or an int matrix; both True/False and is not None will be tested.
+    an |V(G)| x |V(G)| adjacency matrix. the adjacency matrix must be boolean.
 
     if get_path is True, then an array of integer lists will be returned that
     detail the paths from src to each other vertex in V(G).
@@ -66,12 +68,14 @@ def bfs(src, G, is_adjm = False, get_path = False):
             # values in G as an indication of an unweighted edge.
             for v in range(n):
                 if dist[v] == math.inf:
-                    if (G[u][v] is not None) or (G[u][v] == True):
+                    # if it is not None, and an integer or boolean and True
+                    if (G[u][v] is not None) and (isinstance(G[u][v], bool)
+                                                  and (G[u][v] == True)):
                         dist[v] = dist[u] + 1
                         Q.append(v)
-                    # if get_path is True, set prev[v] to u
-                    if get_path == True:
-                        prev[v] = u
+                        # if get_path is True, set prev[v] to u
+                        if get_path == True:
+                            prev[v] = u
         # else treat as adjacency list
         else:
             # update distances for all edges in u's edge list, and enqueue, as
