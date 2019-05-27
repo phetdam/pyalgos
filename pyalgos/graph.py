@@ -1,17 +1,16 @@
-# contains functions for manipulating and performing operations on graphs,
-# including shortest paths, reformatting, minimum spanning tree, etc. to allow
-# more flexibility, many of the functions accept a function pointer that
-# specifies how comparison between graph nodes should be performed; by default,
-# if no comparison function is specified, a standard weighted edge format is
-# assumed, i.e.
-#
-# adjacency list entry: at index u, (v, w); represents edge u~v, weight w
-# edge list entry: (u, v, w); represents edge u~v, weight w
-# adjacency matrix entry: at G[u][v] = w; represents edge u~v with weight w. w
-# may be boolean to represent an unweighted edge, or None to represent no edge
-# being present. negative weight edges are allowed.
-#
-#
+__doc__ = """
+contains functions for manipulating and performing operations on graphs,
+including shortest paths, reformatting, minimum spanning tree, etc. to allow
+more flexibility, many of the functions accept a function pointer that specifies
+how comparison between graph nodes should be performed; by default, if no
+comp function is specified, a standard weighted edge format is assumed, i.e.
+
+adjacency list entry: at index u, (v, w); represents edge u~v, weight w
+edge list entry: (u, v, w); represents edge u~v, weight w
+adjacency matrix entry: at G[u][v] = w; represents edge u~v with weight w. w
+may be boolean to represent an unweighted edge, or None to represent no edge
+being present. negative weight edges are allowed.
+"""
 # Changelog:
 #
 # corrected error made by bfs during evaluation of adjacency matrix type. now
