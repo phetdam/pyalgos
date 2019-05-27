@@ -14,7 +14,8 @@ being present. negative weight edges are allowed.
 # Changelog:
 #
 # corrected error made by bfs during evaluation of adjacency matrix type. now
-# only boolean adjacency matrices are supported for bfs.
+# only boolean adjacency matrices are supported for bfs. separated explanation
+# of the package into formal docstring from the changelog.
 #
 # 05-25-2019
 #
