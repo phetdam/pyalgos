@@ -1,8 +1,26 @@
-# file for testing the different functions in pyalgos. can specify which modules
-# to dynamically load and unload, and test each function with different args.
-#
-# IMPORTANT: this script should be in the same directory as the pyalgos package!
-#
+__doc__ = """
+file for testing the different functions in pyalgos. can specify which modules
+to dynamically load and unload, and test each function with different args.
+
+IMPORTANT: this script should be in the same directory as the pyalgos package!
+
+add more examples by defining new objects, and then also defining a string
+name for that object as well; i.e. object foo has name foo__name (string).
+then create an entry in _INPUT_LIST of the following format (nested dict):
+
+for an object foo:
+
+foo__name:
+{_ENAME: foo__name, _EVALUE: foo,
+ _EBLURB: ("Some helpful description about the object.\\n\\nView:\\n{0}\\n"
+           "".format(foo))}
+
+recommended for nested lists: in format(), replace foo with
+str(foo).replace("],", "],\\n") or equivalent as necessary.
+
+in this manner, it becomes possible to look the object up with the info
+command and see what exactly is being passed into a function.
+"""
 # Changelog:
 #
 # 05-26-2019
