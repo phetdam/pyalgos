@@ -29,8 +29,9 @@ command and see what exactly is being passed into a function.
 # test command, which is the main command to be used for testing modules. added
 # functionality for the test command, by using eval to evaluate expressions with
 # the interpreter and return the formatted string output. added checks for
-# the package being in the same directory as this file. started work on the
-# info command.
+# the package being in the same directory as this file. completed info command,
+# and added docstring, separating it from the changelog proper. old stuff from
+# the first iteration of this file (graph testing) still left in place.
 #
 # 05-25-2019
 #
