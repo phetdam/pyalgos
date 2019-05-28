@@ -13,6 +13,12 @@ being present. negative weight edges are allowed.
 """
 # Changelog:
 #
+# 05-28-2019
+#
+# added missing changelog time header.
+#
+# 05-26-2019
+#
 # corrected error made by bfs during evaluation of adjacency matrix type. now
 # only boolean adjacency matrices are supported for bfs. separated explanation
 # of the package into formal docstring from the changelog.
