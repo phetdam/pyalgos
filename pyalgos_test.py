@@ -23,6 +23,11 @@ command and see what exactly is being passed into a function.
 """
 # Changelog:
 #
+# 06-02-2019
+#
+# added new version string, and commented out the old graph testing stuff in the
+# main that is no longer used. added informative welcome message as well.
+#
 # 05-26-2019
 #
 # added implementations for the help function, and started writing code for the
@@ -53,15 +58,15 @@ import sys
 import textwrap # for wrapping lines
 
 from pyalgos import _PACKAGE_NAME # global package name
-from pyalgos import graph
 
 ### global variables ###
 
 # package path
 _PACKAGE_PATH = "./"
 
-# program name
+# program name and version
 _PROGNAME = "pyalgos_test"
+_VERSION = "1.0.1"
 
 # help flag
 _HELP_FLAG = "--help"
@@ -545,21 +550,13 @@ if __name__ == "__main__":
         print("{0}: error: too many arguments. type '{0} {1}' for usage."
               "".format(_PROGNAME, _HELP_FLAG), file = sys.stderr)
         quit(1)
-    # old stuff for testing bfs
-    src = 0
-    print("graph.bfs({0}, {1},\n          get_path = True) ->\n{2}".format(
-        src, u_dag01_al, graph.bfs(src, u_dag01_al, get_path = True)))
-    print("graph.bfs({0}, {1},\n          is_adjm = True, get_path = True,) ->"
-          "\n{2}".format(src, u_dag01_am,
-                         graph.bfs(src, u_dag01_am, is_adjm = True,
-                                   get_path = True)))
+
     #    del graph # can be used to unload a module
-    print(list(inspect.getfullargspec(graph.bfs)))
+    #print(list(inspect.getfullargspec(graph.bfs)))
     # return function pointer (callable)
-    thismodule = graph
-    print(getattr(thismodule, "bfs")(src, u_dag01_al, get_path = True))
-    print(str(inspect.signature(graph.bfs)).strip("()"))
-    # print some informative message here
+    #thismodule = graph
+    #print(getattr(thismodule, "bfs")(src, u_dag01_al, get_path = True))
+    #print(str(inspect.signature(graph.bfs)).strip("()"))
 
     # if the package is not in the same directory, print error and exit
     if os.path.isdir(_PACKAGE_PATH + _PACKAGE_NAME) == False:
@@ -567,6 +564,11 @@ if __name__ == "__main__":
                        "{0} be located in the same directory."
                        "".format(_PROGNAME, _PACKAGE_NAME)), file = sys.stderr)
         quit(1)
+    # print welcome message
+    print(_strwrap("\n{0} version: {3}\ninteractive module tester for package "
+                   "{1}. type '{2} command' for help on a specific command, or "
+                   "simply '{2}' for the list of available commands.\n"
+                   "".format(_PROGNAME, _PACKAGE_NAME, C_HELP, _VERSION)))
     # main interpreter line
     while True:
         # prompt for input, save to string, parse arguments (crudely)
