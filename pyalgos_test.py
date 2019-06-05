@@ -23,6 +23,11 @@ command and see what exactly is being passed into a function.
 """
 # Changelog:
 #
+# 06-04-2019
+#
+# made an aesthetic correction; test output line no longer has "> output: "; now
+# simply just reads "> " like the python interpreter.
+#
 # 06-02-2019
 #
 # added new version string, and commented out the old graph testing stuff in the
@@ -371,7 +376,7 @@ def _test(args):
                            "".format(C_TEST, err.__class__, err)))
             return
         # else print formatted output
-        print(_strwrap("> output: " + str(rval)))
+        print(_strwrap("> " + str(rval)))
     # too many arguments, so print error again
     else:
         print("{0}: error: too many arguments. type '{1} {0}' for usage."
