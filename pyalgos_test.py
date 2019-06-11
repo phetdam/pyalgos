@@ -23,6 +23,11 @@ command and see what exactly is being passed into a function.
 """
 # Changelog:
 #
+# 06-10-2019
+#
+# random aesthetic correction; made global variable for the delimiter used to
+# split apart arguments to test, and changed it from '<' to '<<'.
+#
 # 06-04-2019
 #
 # made an aesthetic correction; test output line no longer has "> output: "; now
@@ -106,6 +111,9 @@ C_INFO_INP = "inputs"
 # global dictionary of imported modules
 _IMPORT_LIST = {}
 
+# delimiter used for splitting C_TEST args
+C_TEST_DELIM = "<<"
+
 # dictionary of available commands (for lookup purposes)
 _COMMAND_LIST = {C_EXIT:
                  {_CNAME: C_EXIT,
@@ -121,16 +129,16 @@ _COMMAND_LIST = {C_EXIT:
                            "list of all available commands.\n".format(C_HELP))},
                   C_TEST:
                   {_CNAME: C_TEST,
-                   _CHELP: ("Usage: {0} module_name.function_name < arg1, arg2,"
-                            " ... \n\n"
+                   _CHELP: ("Usage: {0} module_name.function_name {1} arg1, "
+                            "arg2, ... \n\n"
                             "Tests a function specified by function_name from "
                             "module module_name. args is a sequence of comma-"
                             "separated strings, representing any args for the "
                             "specified function. arguments may either be "
                             "manually specified, or refer to any predefined"
                             " internal examples whose descriptions may be "
-                            "retrieved with the '{1}' command.\n"
-                            "".format(C_TEST, C_INFO))},
+                            "retrieved with the '{2}' command.\n"
+                            "".format(C_TEST, C_TEST_DELIM, C_INFO))},
                  C_INFO:
                  {_CNAME: C_INFO,
                   _CHELP: ("Usage: {0} {1} [ module_name module_name."
@@ -236,8 +244,8 @@ def _ufatal(fname, file = sys.stderr):
 # will just split by whitespace. important because the test command takes a
 # different input format from the other commands.
 def _argsplit(s):
-    # attempt to split the string by "<"
-    tokens = s.split("<")
+    # attempt to split the string by C_TEST_DELIM
+    tokens = s.split(C_TEST_DELIM)
     # if the length is 0, just return empty list
     if len(tokens) == 0:
         return []
@@ -247,15 +255,15 @@ def _argsplit(s):
     # else if there are more than 2 tokens, there is a syntax error, so reflect
     # an error and then return empty list (input loop will skip rest of loop)
     elif len(tokens) > 2:
-        print("{0}: syntax error: too many '<'-delineated tokens."
-              "".format(_PROGNAME))
+        print("{0}: syntax error: too many '{1}'-delineated tokens."
+              "".format(_PROGNAME, C_TEST_DELIM))
         return []
     # else split first token by spaces, split second token by commas
     preargs = tokens[0].split()
     # if there are not exactly two 2 preargs, print error and return []
     if len(preargs) != 2:
-        print("{0}: syntax error: 2 pre-'<' arguments required, {1} received"
-              "".format(_PROGNAME, len(preargs)))
+        print("{0}: syntax error: 2 pre-'{1}' arguments required, {2} received"
+              "".format(_PROGNAME, C_TEST_DELIM, len(preargs)))
         return []
     postargs = tokens[1].split(",")
     # strip whitespace from all preargs and postargs
